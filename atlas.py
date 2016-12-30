@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 
-# starterbot"s ID as an environment variable
+# atlas's ID as an environment variable
 BOT_ID = os.environ.get("BOT_ID")
 
 # constants
@@ -46,38 +46,41 @@ def handle_command(command, channel):
         replacement = u"<td>" + course + u"</td>" + u"\n" + new_status
         commit_msg = course + " Set " + num
         response = site_edit("/ntc.html",r"<td>"+re.escape(course) + r"</td>\n.*</td>",replacement,commit_msg)
-        slack_client.api_call("chat.postMessage",channel=channel,text=response,as_user=True)
+        slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
         if status.lower() == 'ready':
             response = tweet("NTC Set " + num + " for " + course + " is ready! #studyhard")
-            slack_client.api_call("chat.postMessage",channel=channel,text=response, as_user=True)
+            slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
             return
         return
 
     if re.match(r"ntc anat[0-9]{3}",command):
         course = coursename(command)
         response = '*Set ' + sitefind(course,"https://macssmcgill.github.io/ntc.html") + "* | https://macssmcgill.github.io/ntc.html"
-        slack_client.api_call("chat.postMessage",channel=channel,text=response, as_user=True)
+        slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
         return
 
     if re.match(r"help",command):
         response = help()
-        slack_client.api_call("chat.postMessage",channel=channel,text=response,as_user=True)
+        slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
         return
 
     if command.startswith("tweet"):
         response = tweet(command)
-        slack_client.api_call("chat.postMessage",channel=channel,text=response, as_user=True)
+        slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
         return
+    if command.startswith("weather"):
+        response = current_weather()
+        slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
     if command.startswith("restart"):
         response = "Restarting... https://streamable.com/dli1"
-        slack_client.api_call("chat.postMessage",channel=channel,text=response,as_user=True)
+        slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
         restart_program()
         return
 
     else:
         response = "Not a valid command. Use `@atlas help` to get a list of commands."
-        slack_client.api_call("chat.postMessage",channel=channel,text=response,as_user=True)
+        slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
 def coursename(command):
     coursename = str(command).replace("ntc ","")
@@ -118,9 +121,41 @@ def tweet(command):
         confirm = "Tweeted: " + status.text
     return confirm
 
+def current_weather():
+    url = urllib2.urlopen("http://weather.gc.ca/city/pages/qc-147_metric_e.html")
+    soup = BeautifulSoup(url, "html.parser")
+    # Get date
+    observed_label = soup.find("dt",string="Date: ")
+    observed = observed_label.find_next_sibling().get_text().rstrip()
+    # Get temperature
+    temperature_label = soup.find("dt",string="Temperature:")
+    temperature = temperature_label.find_next_sibling().get_text().strip()
+    # Get condition
+    condition_label = soup.find("dt",string="Condition:")
+    condition = condition_label.find_next_sibling().get_text().strip()
+    # Get pressure
+    pressure_label = soup.find("dt",string="Pressure:")
+    pressure = pressure_label.find_next_sibling().get_text().strip()
+    # Get tendency
+    tendency_label = soup.find("dt",string="Tendency:")
+    tendency = tendency_label.find_next_sibling().get_text().strip()
+    # Get wind
+    wind_label = soup.find("dt",string="Wind:")
+    wind = wind_label.find_next_sibling().get_text().strip()
+    windchill = u"N/A"
+    try:
+        # Get windchill, only if it can be found.
+        windchill_label = soup.find("a",string="Wind Chill")
+        windchill = windchill_label.find_next().get_text().strip() + u"\xb0C"
+    except:
+        pass
+
+    weather_now = u"Conditions observed at: *%s*.\nTemperature: *%s*\nCondition: *%s*\nPressure: *%s*\nTendency: *%s*\nWind speed: *%s*\nWind chill: *%s*" % (observed,temperature,condition,pressure,tendency,wind,windchill)
+    return weather_now
+
 def help():
     commandlist = """
-                    `@atlas tweet 'CONTENTS OF TWEET'`\n`@atlas ntc anat262 status`\n`@atlas ntc anat262 update 1 ready` or `@atlas ntc anat262 update 1 in progress`\n`@atlas restart`
+                    `@atlas tweet 'CONTENTS OF TWEET'`\n`@atlas ntc anat262 status`\n`@atlas ntc anat262 update 1 ready` or `@atlas ntc anat262 update 1 in progress`\n`@atlas weather`\n`@atlas restart`
                     """
     return commandlist
 
