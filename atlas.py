@@ -71,6 +71,7 @@ def handle_command(command, channel):
     if command.startswith("weather"):
         response = current_weather()
         slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
+        return
 
     if command.startswith("restart"):
         response = "Restarting... https://streamable.com/dli1"
