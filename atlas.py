@@ -61,7 +61,7 @@ def handle_command(command, channel):
 
     if re.match(r"help",command):
         response = help()
-        slack_client.api_call("chat.postMessage",channel=channel,text=response,as_uas_user=True)
+        slack_client.api_call("chat.postMessage",channel=channel,text=response,as_user=True)
         return
 
     if command.startswith("tweet"):
