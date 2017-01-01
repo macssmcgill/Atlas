@@ -1,4 +1,4 @@
-# Set language for build
+# Set language for build, defaults to Python 2.7
 language: python
 
 # Install dependencies
