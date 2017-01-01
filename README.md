@@ -3,13 +3,7 @@ A slackbot for MACSS
 
 ## Dependencies
 
-`pip install --user BeautifulSoup4`
-
-`pip install --user pygithub`
-
-`pip install --user slackclient`
-
-`pip install --user python-twitter`
+`pip install --user -r requirements.txt`
 
 ## Environment Variables
 
