@@ -1,4 +1,4 @@
-# atlas
+# atlas [![Build Status](https://travis-ci.org/macssmcgill/atlas.svg?branch=master)](https://travis-ci.org/macssmcgill/atlas)
 A slackbot for MACSS
 
 ## Dependencies
