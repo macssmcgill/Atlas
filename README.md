@@ -1,5 +1,5 @@
 # atlas [![Build Status](https://travis-ci.org/macssmcgill/atlas.svg?branch=master)](https://travis-ci.org/macssmcgill/atlas)
-A slackbot for MACSS
+A slackbot for MACSS. Use Python 2.7.
 
 ## Dependencies
 
