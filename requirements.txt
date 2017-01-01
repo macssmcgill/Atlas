@@ -1,0 +1,4 @@
+BeautifulSoup==4.4.0
+PyGithub==1.29
+slackclient==1.0.4
+python-twitter==3.2

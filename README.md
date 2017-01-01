@@ -3,7 +3,7 @@ A slackbot for MACSS
 
 ## Dependencies
 
-`pip install --user BeautifulSoup`
+`pip install --user BeautifulSoup4`
 
 `pip install --user pygithub`
 
