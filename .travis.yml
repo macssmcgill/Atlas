@@ -5,8 +5,9 @@ language: python
 install: pip install -r requirements.txt
 
 # Test the build
-script: py.test *.py
+script: py.test atlas.py
 
 # Slack notifications
 notifications:
   slack: macsscouncil:cYMPSpnVTTq5W4dATW5Xshyj
+  email: false
