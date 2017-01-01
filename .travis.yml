@@ -1,3 +1,8 @@
+# Set language for build
 language: python
+
+# Install dependencies
 install: pip install -r requirements.txt
+
+# Test the build
 script: py.test *.py
