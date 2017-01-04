@@ -119,7 +119,7 @@ def tweet(command):
     else:
         api = twitter.Api(consumer_key=os.environ.get("TWITTER_CONSUMER_KEY"),consumer_secret=os.environ.get("TWITTER_CONSUMER_SECRET"),access_token_key=os.environ.get("TWITTER_ACCESS_TOKEN"),access_token_secret=os.environ.get("TWITTER_ACCESS_TOKEN_SECRET"))
         status = api.PostUpdate(content)
-        confirm = "Tweeted: " + status.text
+        confirm = "*Tweeted:* " + status.text
     return confirm
 
 def current_weather():
