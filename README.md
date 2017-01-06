@@ -1,4 +1,4 @@
-# atlas [![Build Status](https://travis-ci.org/macssmcgill/atlas.svg?branch=master)](https://travis-ci.org/macssmcgill/atlas) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/macssmcgill/atlas/blob/master/LICENSE)
+# atlas [![Build Status](https://travis-ci.org/macssmcgill/atlas.svg?branch=master)](https://travis-ci.org/macssmcgill/atlas) [![GitHub release](https://img.shields.io/badge/Release-v1.0-red.svg)](https://github.com/macssmcgill/atlas/releases) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/macssmcgill/atlas/blob/master/LICENSE)
 A slackbot for MACSS. Use Python 2.7.
 
 ## Dependencies
