@@ -24,7 +24,6 @@ def handle_command(command, channel):
         are valid commands. If so, then acts on the commands. If not,
         returns back what it needs for clarification.
     """
-
     if command.startswith("hi"):
         response = "What's up?"
         slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
@@ -114,6 +113,11 @@ def site_edit(pagelink,query,replacement,commit_msg):
 
 def tweet(command):
     content = str(command).replace("tweet ","").strip("'")
+    content = re.sub(r"\|.*>","",content)
+    content = re.sub(r"<(mailto:|http://|http://www\.)","",content)
+    content = content.replace("&amp;","&")
+    print(content)
+    print(len(content))
     if len(content)>140:
         confirm = u"Tweet failed: longer than 140 characters. Length = %s" % (len(content))
     else:
