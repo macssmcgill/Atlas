@@ -116,8 +116,6 @@ def tweet(command):
     content = re.sub(r"\|.*>","",content)
     content = re.sub(r"<(mailto:|http://|http://www\.)","",content)
     content = content.replace("&amp;","&")
-    print(content)
-    print(len(content))
     if len(content)>140:
         confirm = u"Tweet failed: longer than 140 characters. Length = %s" % (len(content))
     else:
