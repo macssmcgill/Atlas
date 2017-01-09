@@ -108,14 +108,14 @@ def site_edit(pagelink,query,replacement,commit_msg):
     file = repo.get_file_contents(pagelink)
     modified = re.sub(query,replacement,unicode(file.decoded_content,'utf-8'))
     if modified == unicode(file.decoded_content,'utf-8'):
-        print("Replacement failed.")
+        print(u"Replacement failed.")
     repo.update_file("/ntc.html", "NTC Update: " + commit_msg,modified, file.sha)
-    return "Webpage edited. Double-check that the correct set has been updated. | https://macssmcgill.github.io/ntc.html"
+    return u"Webpage edited. Double-check that the correct set has been updated. | https://macssmcgill.github.io/ntc.html"
 
 def tweet(command):
     content = str(command).replace("tweet ","").strip("'")
     if len(content)>140:
-        confirm = "Tweet failed: longer than 140 characters."
+        confirm = u"Tweet failed: longer than 140 characters. Length = %s" % (len(content))
     else:
         api = twitter.Api(consumer_key=os.environ.get("TWITTER_CONSUMER_KEY"),consumer_secret=os.environ.get("TWITTER_CONSUMER_SECRET"),access_token_key=os.environ.get("TWITTER_ACCESS_TOKEN"),access_token_secret=os.environ.get("TWITTER_ACCESS_TOKEN_SECRET"))
         status = api.PostUpdate(content)
