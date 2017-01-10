@@ -112,9 +112,9 @@ def site_edit(pagelink,query,replacement,commit_msg):
     return u"Webpage edited. Double-check that the correct set has been updated. | https://macssmcgill.github.io/ntc.html"
 
 def tweet(command):
-    content = str(command).replace("tweet ","").strip("'")
+    content = str(command).replace("tweet ","").strip("'") # Receives links in the form: <mailto:macss.academic@gmail.com|macss.academic@gmail.com>
     content = re.sub(r"\|.*>","",content)
-    content = re.sub(r"<(mailto:|http://|http://www\.)","",content)
+    content = re.sub(r"<(mailto:|https?:\/\/www\.|https?:\/\/)","",content)
     content = content.replace("&amp;","&")
     if len(content)>140:
         confirm = u"Tweet failed: longer than 140 characters. Length = %s" % (len(content))
