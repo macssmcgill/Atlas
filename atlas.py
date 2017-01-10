@@ -24,17 +24,17 @@ def handle_command(command, channel):
         are valid commands. If so, then acts on the commands. If not,
         returns back what it needs for clarification.
     """
-    if command.startswith("hi"):
+    if command.lower().startswith("hi"):
         response = "What's up?"
         slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
         return
 
-    if command.startswith("bye"):
+    if command.lower().startswith("bye"):
         response = "Goodbye!"
         slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
         return
 
-    if re.match(r"ntc anat[0-9]{3} update [0-9]{1,2} (ready|in progress)",command):
+    if re.match(r"ntc anat[0-9]{3} update [0-9]{1,2} (ready|in progress)",command.lower()):
         query = command.replace("ntc ","")
         course = coursename(query)
         ntc_req = re.sub(r"[a-zA-Z]{4}[0-9]{3}\supdate\s","",query)
@@ -52,34 +52,40 @@ def handle_command(command, channel):
             return
         return
 
-    if re.match(r"ntc anat[0-9]{3}",command):
+    if re.match(r"ntc anat[0-9]{3}",command.lower()):
         course = coursename(command)
         response = '*Set ' + sitefind(course,"https://macssmcgill.github.io/ntc.html") + "* | https://macssmcgill.github.io/ntc.html"
         slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
         return
 
-    if re.match(r"help",command):
+    if re.match(r"help",command.lower()):
         response = help()
         slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
         return
 
-    if command.startswith("tweet"):
+    if command.lower().startswith("tweet"):
         response = tweet(command)
         slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
         return
-    if command.startswith("weather"):
+    if command.lower().startswith("weather"):
         response = current_weather()
         slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
         return
 
-    if command.startswith("restart"):
+    if command.lower().startswith("restart"):
         response = "Restarting... https://streamable.com/dli1"
         slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
         restart_program()
         return
 
+    if command.lower().startswith("die"):
+        response = "https://streamable.com/ag54p"
+        slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
+        sys.exit()
+        return
+
     else:
-        response = "Not a valid command. Use `@atlas help` to get a list of commands."
+        response = "Not a valid command. Use `@atlas help` to get a list of commands. https://streamable.com/foljj"
         slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
 
 def coursename(command):
@@ -112,7 +118,9 @@ def site_edit(pagelink,query,replacement,commit_msg):
     return u"Webpage edited. Double-check that the correct set has been updated. | https://macssmcgill.github.io/ntc.html"
 
 def tweet(command):
-    content = str(command).replace("tweet ","").strip("'") # Receives links in the form: <mailto:macss.academic@gmail.com|macss.academic@gmail.com>
+    content = str(command).replace("tweet ","").strip("'")
+    # Receives links in the form: <mailto:macss.academic@gmail.com|macss.academic@gmail.com> or as <https://macssmcgill.github.io/services.html>
+    content = str(command).replace(">","")
     content = re.sub(r"\|.*>","",content)
     content = re.sub(r"<(mailto:|https?:\/\/www\.|https?:\/\/)","",content)
     content = content.replace("&amp;","&")
@@ -173,7 +181,7 @@ def parse_slack_output(slack_rtm_output):
         for output in output_list:
             if output and "text" in output and AT_BOT in output["text"]:
                 # return text after the @ mention, whitespace removed
-                return output["text"].split(AT_BOT)[1].strip().lower(), \
+                return output["text"].split(AT_BOT)[1].strip(), \
                        output["channel"]
     return None, None
 
