@@ -79,7 +79,7 @@ def handle_command(command, channel):
         return
 
     if command.lower().startswith("die"):
-        response = "https://streamable.com/ag54p"
+        response = "http://i.imgur.com/g3Qk9gQ.gifv"
         slack_client.api_call("chat.postMessage", channel=channel, text=response, as_user=True)
         sys.exit()
         return
