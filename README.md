@@ -11,7 +11,7 @@ Use Python 2.7.
 
 * A humanoid robot developed by Boston Dynamics and DARPA
 
-* A slack bot for MACSS https://macssmcgill.github.io/
+* A slack bot for MACSS
 
 ## Dependencies
 
