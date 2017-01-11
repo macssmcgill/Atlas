@@ -1,5 +1,17 @@
-# atlas [![Build Status](https://travis-ci.org/macssmcgill/atlas.svg?branch=master)](https://travis-ci.org/macssmcgill/atlas) [![GitHub release](https://img.shields.io/badge/Release-v1.0-red.svg)](https://github.com/macssmcgill/atlas/releases) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/macssmcgill/atlas/blob/master/LICENSE)
-A slackbot for MACSS. Use Python 2.7.
+# Atlas [![Build Status](https://travis-ci.org/macssmcgill/atlas.svg?branch=master)](https://travis-ci.org/macssmcgill/atlas) [![GitHub release](https://img.shields.io/badge/Release-v1.0-red.svg)](https://github.com/macssmcgill/atlas/releases) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/macssmcgill/atlas/blob/master/LICENSE)
+Use Python 2.7.
+
+[Atlas](https://en.wikipedia.org/wiki/Atlas_\(disambiguation\)):
+
+* A deity who held up the celestial globe
+
+* Part of the spine that holds up the celestial globe of the skull
+
+* An early supercomputer, built in the 1960s
+
+* A humanoid robot developed by Boston Dynamics and DARPA
+
+* A slack bot for MACSS https://macssmcgill.github.io/
 
 ## Dependencies
 
