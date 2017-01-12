@@ -1,4 +1,4 @@
-# Atlas [![Build Status](https://travis-ci.org/macssmcgill/atlas.svg?branch=master)](https://travis-ci.org/macssmcgill/atlas) [![GitHub release](https://img.shields.io/badge/Release-v1.0-red.svg)](https://github.com/macssmcgill/atlas/releases) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/macssmcgill/atlas/blob/master/LICENSE)
+# Atlas [![Build Status](https://travis-ci.org/macssmcgill/Atlas.svg?branch=master)](https://travis-ci.org/macssmcgill/Atlas) [![GitHub release](https://img.shields.io/badge/Release-v1.0-red.svg)](https://github.com/macssmcgill/Atlas/releases) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/macssmcgill/Atlas/blob/master/LICENSE)
 Use Python 2.7.
 
 [Atlas](https://en.wikipedia.org/wiki/Atlas_\(disambiguation\)):
